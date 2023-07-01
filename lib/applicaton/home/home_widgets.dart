@@ -10,7 +10,7 @@ class TopBoxWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: kTopBoxDecration,
-      height: 250,
+      height: 150,
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -68,7 +68,7 @@ class CommentBox extends StatelessWidget {
     return Padding(
       padding: kCommentBoxPadding,
       child: Container(
-          height: 70,
+          height: 50,
           width: double.maxFinite,
           decoration: BoxDecoration(
               border: Border.all(),
@@ -77,6 +77,7 @@ class CommentBox extends StatelessWidget {
           child: Center(
             child: ListTile(
               leading: CircleAvatar(
+                radius: 15,
                 child: child,
                 backgroundColor: Colors.lightGreen,
               ),
@@ -102,20 +103,24 @@ class SeasrchBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Padding(
-      padding: EdgeInsets.all(8.0),
-      child: TextField(
-        decoration: InputDecoration(
-          prefixIcon: Icon(Icons.search),
-          hintText: 'search',
-          filled: true,
-          fillColor: Color(0xffEDEDED),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-                color: kBottomBoxColur), // Set your desired outline color here
-            borderRadius: BorderRadius.all(Radius.circular(30.0)),
+      padding: EdgeInsets.only(left: 8, right: 8),
+      child: SizedBox(
+        height: 50,
+        child: TextField(
+          decoration: InputDecoration(
+            prefixIcon: Icon(Icons.search),
+            hintText: 'search',
+            filled: true,
+            fillColor: Color(0xffEDEDED),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                  color:
+                      kBottomBoxColur), // Set your desired outline color here
+              borderRadius: BorderRadius.all(Radius.circular(30.0)),
+            ),
+            // border: OutlineInputBorder(
+            //     borderRadius: BorderRadius.circular(30))
           ),
-          // border: OutlineInputBorder(
-          //     borderRadius: BorderRadius.circular(30))
         ),
       ),
     );

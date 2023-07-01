@@ -30,9 +30,19 @@ class HOMEScreen extends StatelessWidget {
                     return Expanded(
                       child: SizedBox(
                         child: ListView.builder(
-                          itemCount: photos.length - 1,
+                          itemCount: 8,
                           itemBuilder: (context, index) {
                             final Photo photo = photos[index];
+                            if (photo == photos[7]) {
+                              return GestureDetector(
+                                onTap: () {},
+                                child: CommentBox(
+                                  icon: Icons.add,
+                                  comment: photo.title,
+                                  child: Image.network(photo.thumbnailUrl),
+                                ),
+                              );
+                            }
                             return CommentBox(
                               icon: Icons.check,
                               comment: photo.title,
@@ -46,60 +56,17 @@ class HOMEScreen extends StatelessWidget {
                     final Photo photo = state.photo;
                     return CommentBox(
                         icon: Icons.check,
-                        child: Image.network(photo.thumbnailUrl),
-                        comment: photo.title);
+                        comment: photo.title,
+                        child: Image.network(photo.thumbnailUrl));
                   } else if (state is PhotoError) {
-                    return Center(child: Text('Failed to fetch data.'));
+                    return const Center(child: Text('Failed to fetch data.'));
                   } else {
                     return Container();
                   }
                 },
               ),
               kSpaceBox,
-              BlocConsumer<PhotoBloc, PhotoState>(
-                listener: (context, state) {
-                  if (state is CommentAdded) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Comment added'),
-                      ),
-                    );
-                  }
-                },
-                builder: (context, state) {
-                  if (state is PhotoLoading) {
-                    return Center(child: CircularProgressIndicator());
-                  } else if (state is PhotoLoaded) {
-                    final List<Photo> photos = state.photos;
-                    return GestureDetector(
-                        onTap: () {
-                          add_cooment_box(context, commentcontrol);
-                        },
-                        child: CommentBox(
-                          comment: photos.last.title,
-                          icon: Icons.add,
-                          child: Image.network(photos.last.thumbnailUrl),
-                        ));
-                  } else if (state is CommentAdded) {
-                    final Photo photo = state.photo;
-                    return CommentBox(
-                        icon: Icons.check,
-                        comment: photo.title,
-                        child: Image.network(photo.thumbnailUrl));
-                  } else if (state is PhotoError) {
-                    return const Center(child: Text('Failed to fetch data.'));
-                  } else {
-                    return GestureDetector(
-                        onTap: () {
-                          add_cooment_box(context, commentcontrol);
-                        },
-                        child: const CommentBox(
-                          comment: 'thid is the 2nd comment',
-                          icon: Icons.add,
-                        ));
-                  }
-                },
-              ),
+
               // GestureDetector(
               //     onTap: () {
               //       add_cooment_box(context);

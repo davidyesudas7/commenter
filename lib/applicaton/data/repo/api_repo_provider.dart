@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:comment_adder/applicaton/data/model/comment_photo_model.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class ApiProvider {
@@ -30,6 +31,7 @@ class ApiProvider {
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> jsonData = jsonDecode(response.body);
+      debugPrint(jsonData.toString());
       return Photo.fromJson(jsonData);
     } else {
       throw Exception('Failed to add comment');

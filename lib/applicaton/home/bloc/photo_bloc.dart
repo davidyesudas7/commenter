@@ -1,8 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:comment_adder/applicaton/data/model/comment_photo_model.dart';
 import 'package:comment_adder/applicaton/data/repo/api_repo_provider.dart';
 import 'package:equatable/equatable.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 part 'photo_event.dart';
 part 'photo_state.dart';
 

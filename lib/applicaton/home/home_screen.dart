@@ -21,7 +21,8 @@ class HOMEScreen extends StatelessWidget {
               const TopBoxWidget(),
               kSpaceBox,
               const SeasrchBox(),
-              BlocBuilder<PhotoBloc, PhotoState>(
+              BlocConsumer<PhotoBloc, PhotoState>(
+                listener: (context, state) {},
                 builder: (context, state) {
                   if (state is PhotoLoading) {
                     return const Center(child: CircularProgressIndicator());
@@ -35,7 +36,9 @@ class HOMEScreen extends StatelessWidget {
                             final Photo photo = photos[index];
                             if (photo == photos[7]) {
                               return GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  add_cooment_box(context, commentcontrol);
+                                },
                                 child: CommentBox(
                                   icon: Icons.add,
                                   comment: photo.title,
@@ -98,15 +101,26 @@ class HOMEScreen extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () {
-                BlocProvider.of<PhotoBloc>(context)
-                    .add(AddComment(commentcontrol.text));
                 Navigator.of(context).pop();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Comment canceled'),
+                  ),
+                );
               },
               child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () {
+                debugPrint(commentcontrol.text);
+                BlocProvider.of<PhotoBloc>(context)
+                    .add(AddComment(commentcontrol.text));
                 Navigator.of(context).pop();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Comment added'),
+                  ),
+                );
               },
               child: const Text('Add'),
             ),

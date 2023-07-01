@@ -32,8 +32,10 @@ class ApiProvider {
     if (response.statusCode == 200) {
       final Map<String, dynamic> jsonData = jsonDecode(response.body);
       debugPrint(jsonData.toString());
+
       return Photo.fromJson(jsonData);
     } else {
+      debugPrint(response.statusCode.toString());
       throw Exception('Failed to add comment');
     }
   }

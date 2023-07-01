@@ -78,8 +78,8 @@ class CommentBox extends StatelessWidget {
             child: ListTile(
               leading: CircleAvatar(
                 radius: 15,
-                child: child,
                 backgroundColor: Colors.lightGreen,
+                child: child,
               ),
               title: Text(
                 comment,
